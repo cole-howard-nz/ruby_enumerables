@@ -3,7 +3,7 @@ def stock_picker(prices)
 
     prices.each_with_index { |p1, buy_index|
         prices.each_with_index { |p2, sell_index|
-            profit = [p2 - p1, buy_index, sell_index] if p2 - p1 > profit[0] && buy_index < sell_index
+            profit = [p2 - p1, buy_index, sell_index] if buy_index < sell_index && p2 - p1 > profit[0]
         }
     }
 
