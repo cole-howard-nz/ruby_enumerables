@@ -3,7 +3,12 @@ require_relative "dog.rb"
 class GoodDog
     include Dog
 
-    def action
-        puts "Wait for owner to return"
+    def initialize(name = "Unknown")
+        @name = name
+        puts "A good dog has been born."
+    end
+
+    def speak
+        puts "#{ @name } says woof!"
     end
 end

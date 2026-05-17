@@ -1,7 +1,7 @@
 require_relative "good_dog.rb" 
 require_relative "bad_dog.rb" 
 
-chas = GoodDog.new
+chas = GoodDog.new("Chas")
 chas.speak "Woof"
 chas.action
 
