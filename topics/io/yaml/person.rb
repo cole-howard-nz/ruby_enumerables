@@ -11,9 +11,9 @@ class Person
 
   def to_yaml
     YAML.dump({
-      name: self.name,
-      age: self.age,
-      gender: self.gender
+      :name => self.name,
+      :age => self.age,
+      :gender => self.gender
     })
   end
 
