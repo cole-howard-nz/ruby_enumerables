@@ -1,6 +1,6 @@
 module Enumerable
   def my_each_with_index
-    # Allows method chaining unless there is a block meaning
+    # Allows method chaining unless there is a block to work on
     return to_enum(:my_each_with_index) unless block_given?
 
     index = 0
@@ -64,6 +64,17 @@ module Enumerable
     end
 
     count
+  end
+
+  def my_map
+    return to_enum(:my_map) unless block_given?
+
+    map = []
+    for element in self
+      map.append(yield element)
+    end
+
+    map
   end
 end
 
