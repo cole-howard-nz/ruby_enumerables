@@ -4,7 +4,7 @@ module Enumerable
     return to_enum(:my_each_with_index) unless block_given?
 
     index = 0
-    for element in self
+    my_each do |element|
       yield element, index
       index += 1
     end
@@ -14,9 +14,7 @@ module Enumerable
     return to_enum(:my_select) unless block_given?
 
     collection = []
-    for element in self
-      collection.push(element) if yield element
-    end
+    my_each { |element| collection.push(element) if yield element }
 
     collection
   end
@@ -25,7 +23,7 @@ module Enumerable
     return to_enum(:my_all?) unless block_given?
 
     passed = false
-    for element in self
+    my_each do |element| 
       passed = yield element
       return false unless passed
     end
@@ -36,9 +34,7 @@ module Enumerable
   def my_any?
     return to_enum(:my_any?) unless block_given?
 
-    for element in self
-      return true if yield element
-    end
+    my_each { |element| return true if yield element }
 
     false
   end
@@ -46,22 +42,14 @@ module Enumerable
   def my_none?
     return to_enum(:my_none?) unless block_given?
 
-    passed = false
-    for element in self
-      passed = yield element
-      return false if passed
-    end
-
-    true
+    !my_any? { |element| return false if yield element }
   end
 
   def my_count
     return self.count unless block_given?
 
     count = 0
-    for element in self
-      count += 1 if yield element
-    end
+    my_each { |element| count += 1 if yield element }
 
     count
   end
@@ -70,12 +58,21 @@ module Enumerable
     return to_enum(:my_map) unless block_given?
 
     map = []
-    for element in self
-      map.append(yield element)
-    end
+    my_each { |element| map.append(yield element) }
 
     map
   end
+
+  # def my_inject(starting_value=0)
+  #   return to_enum(:to_inject) unless block_given?
+
+  #   count = starting_value
+  #   for accumlator, element in self
+  #     count += yield accumlator, element
+  #   end
+
+  #   count
+  # end 
 end
 
 class Array
