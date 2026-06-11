@@ -39,8 +39,20 @@ module Enumerable
     for element in self
       return true if yield element
     end
-    
+
     false
+  end
+
+  def my_none?
+    return to_enum(:my_none?) unless block_given?
+
+    passed = false
+    for element in self
+      passed = yield element
+      return false if passed
+    end
+
+    true
   end
 end
 
