@@ -20,6 +20,18 @@ module Enumerable
 
     collection
   end
+
+  def my_all?
+    return to_enum(:my_all) unless block_given?
+
+    passed = false
+    for element in self
+      passed = yield element
+      return false unless passed
+    end
+    
+    true
+  end
 end
 
 class Array
@@ -31,5 +43,3 @@ class Array
     end
   end
 end
-
-
