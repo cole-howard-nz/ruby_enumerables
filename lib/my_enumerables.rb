@@ -22,7 +22,7 @@ module Enumerable
   end
 
   def my_all?
-    return to_enum(:my_all) unless block_given?
+    return to_enum(:my_all?) unless block_given?
 
     passed = false
     for element in self
@@ -31,6 +31,16 @@ module Enumerable
     end
     
     true
+  end
+
+  def my_any?
+    return to_enum(:my_any?) unless block_given?
+
+    for element in self
+      return true if yield element
+    end
+    
+    false
   end
 end
 
