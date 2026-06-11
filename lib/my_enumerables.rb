@@ -9,6 +9,17 @@ module Enumerable
       index += 1
     end
   end
+
+  def my_select
+    return to_enum(:my_select) unless block_given?
+
+    collection = []
+    for element in self
+      collection.push(element) if yield element
+    end
+
+    collection
+  end
 end
 
 class Array
@@ -21,5 +32,4 @@ class Array
   end
 end
 
-[1,2,3,4,5].my_each { |element| puts element * 2 }
-[1,2,3,4,5].my_each_with_index { |element, index| puts "#{ index } : #{ element }"}
+
