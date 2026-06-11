@@ -54,6 +54,17 @@ module Enumerable
 
     true
   end
+
+  def my_count
+    return self.count unless block_given?
+
+    count = 0
+    for element in self
+      count += 1 if yield element
+    end
+
+    count
+  end
 end
 
 class Array
