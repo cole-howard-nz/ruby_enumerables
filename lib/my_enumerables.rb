@@ -63,16 +63,16 @@ module Enumerable
     map
   end
 
-  # def my_inject(starting_value=0)
-  #   return to_enum(:to_inject) unless block_given?
+  def my_inject(starting_value=0)
+    return to_enum(:to_inject) unless block_given?
 
-  #   count = starting_value
-  #   for accumlator, element in self
-  #     count += yield accumlator, element
-  #   end
+    count = starting_value
+    for accumlator, element in self
+      count += yield accumlator, element
+    end
 
-  #   count
-  # end 
+    count
+  end 
 end
 
 class Array
